@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.8.1" last-position="3,1" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<database name="new_database">
+</database>
+
+<schema name="public" protected="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="Roles">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="932" y="501"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="nombre" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="descripcion" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<constraint name="rol_id" type="pk-constr" table="public.&quot;Roles&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Servicios">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="947" y="220"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="nombre" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="descripcion">
+		<type name="character varying"/>
+	</column>
+	<column name="imagen">
+		<type name="character varying"/>
+	</column>
+	<constraint name="servicio_id" type="pk-constr" table="public.&quot;Servicios&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Quienes_Somos">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="13" y="26"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="mision" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="vision" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="politica_integral" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="valores_corporativos" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="historia" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="descripcion" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="logo" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<constraint name="quienes_somos_id" type="pk-constr" table="public.&quot;Quienes_Somos&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="Usuarios_id_seq"
+	 start="1" increment="1"
+	 min-value="-2147483648" max-value="2147483647"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+</sequence>
+
+<table name="Usuarios">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="497" y="302"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="aprobado_login" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="nombres" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="apellidos" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="tipo_documento" not-null="true">
+		<type name="character"/>
+	</column>
+	<column name="documento" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="cargo" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<constraint name="id" type="pk-constr" table="public.&quot;Usuarios&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_Roles" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Roles_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="Roles_has_many_Usuarios" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#27c737"
+	 src-table="public.&quot;Roles&quot;"
+	 dst-table="public.&quot;Usuarios&quot;"
+	 src-required="false" dst-required="false"/>
+
+<table name="Experiencias">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="31" y="375"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="nombre" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="entidad_contratante" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="ciudad" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="fecha_inicio" not-null="true">
+		<type name="date"/>
+	</column>
+	<column name="fecha_terminacion" not-null="true">
+		<type name="date"/>
+	</column>
+	<column name="valor_contrato" not-null="true">
+		<type name="money"/>
+	</column>
+	<column name="contrato_numero" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<constraint name="experiencia_id" type="pk-constr" table="public.&quot;Experiencias&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_Usuarios" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Usuarios_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="Noticias">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="901" y="32"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="titulo" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="descripcion" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="imagen" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="aprobado_mostrar" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<constraint name="noticia_id" type="pk-constr" table="public.&quot;Noticias&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_Usuarios" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Noticias_uq" index="2"/>
+		<object name="Usuarios_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="Usuarios_has_many_Quienes_Somos" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#d97004"
+ protected="true"
+	 src-table="public.&quot;Usuarios&quot;"
+	 dst-table="public.&quot;Quienes_Somos&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Noticias_has_one_Usuarios" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#5fc9f9"
+	 src-table="public.&quot;Usuarios&quot;"
+	 dst-table="public.&quot;Noticias&quot;"
+	 src-required="false" dst-required="false">
+	<label ref-type="src-label">
+		<position x="78.09" y="-56.2"/>
+	</label>
+</relationship>
+
+<relationship name="Usuarios_has_many_Experiencias" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#cdd182"
+ protected="true"
+	 src-table="public.&quot;Usuarios&quot;"
+	 dst-table="public.&quot;Experiencias&quot;"
+	 src-required="false" dst-required="false">
+	<label ref-type="src-label">
+		<position x="18.09" y="61.8"/>
+	</label>
+</relationship>
+
+<relationship name="Usuarios_has_many_Servicios" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a0ff17"
+	 src-table="public.&quot;Usuarios&quot;"
+	 dst-table="public.&quot;Servicios&quot;"
+	 src-required="false" dst-required="false"/>
+
+<table name="Contactenos">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="501" y="63"/>
+	<column name="id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="nombre" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="asunto" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="descripcion" not-null="true">
+		<type name="text"/>
+	</column>
+	<constraint name="contacto_id" type="pk-constr" table="public.&quot;Contactenos&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+</dbmodel>
